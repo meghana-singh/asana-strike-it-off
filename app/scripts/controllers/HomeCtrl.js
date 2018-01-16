@@ -5,17 +5,23 @@
 //Has a function to hide a task from view when its selected.
 
 (function(){
-    function HomeCtrl ($scope, $http) {
+    function HomeCtrl ($scope, $http, $stateParams) {
       
-      this.tasksList = null;
-      this.taskHidden = [];
-
       var that = this;
 
-      $http.get('https://app.asana.com/api/1.0/projects/510750020413990/tasks')
-           .then(function(response) {
-	            that.tasksList = response.data.data;
-	   });
+      this.taskHidden = [];
+      this.tasksList  = [];
+
+      var id = /\d+/.exec($stateParams.project);
+
+      var req = {
+        method: 'GET',
+        url: 'https://app.asana.com/api/1.0/projects/'+id+'/tasks'
+      };
+
+      $http(req).then(function(response) {
+	         that.tasksList = response.data.data;
+      });
 
 
      this.hideData = function(id) {
@@ -26,5 +32,5 @@
 
     angular
     .module('strikeItOff')
-    .controller('HomeCtrl', ['$scope', '$http', HomeCtrl]);
+    .controller('HomeCtrl', ['$scope', '$http', '$stateParams', HomeCtrl]);
 })();
