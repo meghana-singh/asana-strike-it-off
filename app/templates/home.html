@@ -1,22 +1,23 @@
 <div class="container">	
+    <button class="pull-right btn btn-default" ng-click="home.taskHidden.length=null">View Hidden Tasks</button>
     <table class="table table-striped">
       <thead>
         <tr>
           <th class="col-xs-8 col-sm-8 col-md-8 col-lg-8 text-center">Tasks Name</th>
-          <th class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">Hide-Show (click to toggle view)</th>
+          <th class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">Hide (click to hide task)</th>
         </tr>
       </thead>
       <tbody>
         <tr>
             <td  class="col-xs-8 col-sm-8 col-md-8 col-lg-8 text-center">
               <div ng-repeat="tasks in home.tasksList">
-                <div ng-class="{'hide-task': home.taskHidden.indexOf(tasks.id) != -1}">  {{tasks.name}} </div>
+                <div ng-show="home.taskHidden.indexOf(tasks.id) == -1">  {{tasks.name}} </div>
 	          </div>
             </td>
             <td class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
               <div ng-repeat="tasks in home.tasksList">
                 <a href="#"> 
-	              <span class='glyphicon glyphicon-check black' type="checkbox" ng-click="home.hideData(tasks.id)" ></span>
+	              <span class='glyphicon glyphicon-check black' type="checkbox" ng-show="home.taskHidden.indexOf(tasks.id) == -1" ng-click="home.hideData(tasks.id)" ></span>
 	            </a>  
               </div>
             </td>
