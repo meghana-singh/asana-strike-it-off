@@ -12,11 +12,11 @@
       this.taskHidden = [];
       this.tasksList  = [];
 
-      var id = /\d+/.exec($stateParams.project);
+      this.id = /\d+/.exec($stateParams.project);
 
       var req = {
         method: 'GET',
-        url: 'https://app.asana.com/api/1.0/projects/'+id+'/tasks'
+        url: 'https://app.asana.com/api/1.0/projects/'+this.id+'/tasks'
       };
 
       $http(req).then(function(response) {
