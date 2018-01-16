@@ -1,5 +1,9 @@
 ## List the tasks under StrikeItOff Project in Asana
-This app lists all the tasks under the project - StrikeItOff (ID: 510750020413990).
+This app lists all the tasks of projects under Asana Project Interface 
+- StrikeItOff (ID: 510750020413990) & 
+- WorkGoals (ID: 517533052591339)
+These project IDs are passed as query parameters to the app and hence this app takes the project ID dynamically.
+
 * These tasks can be hidden from the view using the button provided next to the task.
 * It's configured as Single-Page-Application with AngularJS.
 * It uses Grunt to run a simple server on port 3000.
