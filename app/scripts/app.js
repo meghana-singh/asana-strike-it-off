@@ -12,15 +12,21 @@
              });
 
          $stateProvider
-             .state('home', {
-                 url: '/',
-                 controller: 'HomeCtrl as home',
-                 templateUrl: '/templates/home.html'                 
-             });
+	     .state('home', {
+                 url: '/?project',
+		 controller: 'HomeCtrl as home',
+		 templateUrl: '/templates/home.html',
+		 resolve: {
+		   project: ['$stateParams', function($stateParams){
+		           return $stateParams.project;
+			  }]
+                 }
+
+	     });
     }
 
    //Below we are setting default headers at run time using $http.defaults object.
-   //Authorization is done using Personal Access Token.
+   //Authorization is done using Personal Access Token. We need to use ENV variable to store this token.
 
    function setAuthHeader ($http) {
      $http.defaults.headers.common.Authorization = 'Bearer 0/edf8a8843d0590b80884e98d980a57eb';
@@ -28,7 +34,7 @@
 
     //UI Router module, UI Bootstrapp are injected as dependency into our application.
     angular
-        .module('strikeItOff', ['ui.router', 'ui.bootstrap', 'ngSanitize']) 
+        .module('strikeItOff', ['ui.router', 'ui.bootstrap', 'ngResource', 'ngSanitize']) 
         .config(config)
         .run(['$http', setAuthHeader]);
 })();
